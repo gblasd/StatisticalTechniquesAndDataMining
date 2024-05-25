@@ -1,12 +1,12 @@
 
--- 1 Creacion de la base de datos
+-- 1 create database
 DROP DATABASE IF EXISTS blasGustavo_FINAL;
 CREATE DATABASE IF NOT EXISTS blasGustavo_FINAL;
 
--- 2 Usar la base de datos
+-- 2 move to database
 USE blasGustavo_FINAL;
 
--- 3 Creacion de la estructura de la tabla
+-- 3 create table
 CREATE TABLE IF NOT EXISTS asociados(
 	clave int,
     nombre char(50),
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS asociados(
     paginaweb char(80)
 );
 
--- 4 Creacion de la copia de la tabla
+-- 4 create table backup
 CREATE TABLE IF NOT EXISTS asociados_backup(
 	clave int,
     nombre char(50),
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS asociados_backup(
     paginaweb char(80)
 );
 
--- 5 Creacion del procedimiento almacenado para insertar
+-- 5 Create store procedure to insert data
 DROP PROCEDURE IF EXISTS insertaAsociados;
 delimiter //
 CREATE PROCEDURE insertaAsociados(
@@ -55,7 +55,7 @@ BEGIN
 END//
 delimiter ;
 
--- 6 Creacion del procedimiento almacenado para actualizar
+-- 6 create store procedure to update rows
 DROP PROCEDURE IF EXISTS actualizaAsociados;
 delimiter //
 CREATE PROCEDURE actualizaAsociados(
@@ -82,7 +82,7 @@ BEGIN
 END//
 delimiter ;
 
--- 7 Procedimiento para borrar
+-- 7 store procedure for delete row by id
 DROP PROCEDURE IF EXISTS borraAsociados;
 delimiter //
 CREATE PROCEDURE borraAsociados( p_clave int)
@@ -92,7 +92,7 @@ END//
 delimiter ;
 
 
--- 8 Trigger para borrar
+-- 8 Trigger for delete 
 DELIMITER //
 CREATE TRIGGER inserta_BI_asociados BEFORE INSERT ON asociados
 	FOR EACH ROW
@@ -111,12 +111,12 @@ CREATE TRIGGER inserta_BI_asociados BEFORE INSERT ON asociados
 	END;//
 DELIMITER ;
 
--- PROBANDO trigger inserta_BI_asociados
+-- test trigger inserta_BI_asociados
 INSERT INTO asociados VALUES (2,'Gustavo',239,'insurgentes','03230','Benito Juarez','5571423068','5554323455','holamundo.com');
 SELECT * FROM asociados;
 SELECT * FROM asociados_backup;
 
--- 9 Trigger para actualizar
+-- 9 Trigger to update rows
 DELIMITER //
 CREATE TRIGGER actualiza_BU_asociados BEFORE UPDATE ON asociados
 	FOR EACH ROW
@@ -135,13 +135,13 @@ CREATE TRIGGER actualiza_BU_asociados BEFORE UPDATE ON asociados
 	END;//
 DELIMITER ;
 
--- Probando trigger actualiza_BU_asociados
+-- test trigger actualiza_BU_asociados
 UPDATE asociados SET nombre = "GUSTAVO BLAS" WHERE clave = 2;
 SELECT * FROM asociados;
 SELECT * FROM asociados_backup;
 
 
--- 10 Trigger para borrar
+-- 10 Trigger to delete
 DELIMITER //
 CREATE TRIGGER borra_BD_asociados AFTER DELETE ON asociados
 	FOR EACH ROW
@@ -150,7 +150,7 @@ CREATE TRIGGER borra_BD_asociados AFTER DELETE ON asociados
 	END;//
 DELIMITER ;
 
--- Probando trigger borra_BD_asociados
+-- test trigger borra_BD_asociados
 DELETE FROM asociados WHERE clave = 2;
 SELECT * FROM asociados;
 SELECT * FROM asociados_backup;

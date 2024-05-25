@@ -1,8 +1,9 @@
-
+-- Create database
 DROP DATABASE IF EXISTS tareas;
 CREATE DATABASE IF NOT EXISTS tareas;
 USE tareas;
 
+-- create table 
 DROP TABLE IF EXISTS mobiliario;
 CREATE TABLE IF NOT EXISTS mobiliario (
 	idArticulo int,
@@ -10,6 +11,7 @@ CREATE TABLE IF NOT EXISTS mobiliario (
     existencia int
 );
 
+-- create store procedure
 DROP PROCEDURE IF EXISTS insertaMobiliario;
 delimiter //
 CREATE PROCEDURE insertaMobiliario (p_id int, p_descripcion char(50), p_existencia int)
@@ -17,9 +19,11 @@ CREATE PROCEDURE insertaMobiliario (p_id int, p_descripcion char(50), p_existenc
 //
 delimiter ;
 
+-- call store procedure
 CALL insertaMobiliario(1, 'descripcion1', 10);
 SELECT * FROM mobiliario;
 
+-- create store procedure
 DROP PROCEDURE IF EXISTS actualizaMobiliario;
 delimiter //
 CREATE PROCEDURE actualizamobiliario(p_id int, p_descripcion char(50), p_existencia int)
@@ -29,9 +33,11 @@ CREATE PROCEDURE actualizamobiliario(p_id int, p_descripcion char(50), p_existen
 //
 delimiter ;
 
+-- call store procedure
 CALL actualizaMobiliario(1, 'descripcion2', 20);
 SELECT * FROM mobiliario;
 
+-- create store procedure
 DROP PROCEDURE IF EXISTS selectMobiliario;
 delimiter //
 	CREATE PROCEDURE selectMobiliario(p_id int)
@@ -39,8 +45,10 @@ delimiter //
 // 
 delimiter ;
 
+-- command call store procedure
 CALL selectMobiliario(1);
 
+-- create store procedure
 DROP PROCEDURE IF EXISTS borraMobiliario;
 delimiter //
 CREATE PROCEDURE borraMobiliario(p_id int)
@@ -48,6 +56,7 @@ CREATE PROCEDURE borraMobiliario(p_id int)
 //
 delimiter ;
 
+-- command call store procedure
 CALL borraMobiliario(1);
 SELECT * FROM mobiliario;
 
