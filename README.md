@@ -1,4 +1,4 @@
-# Diplomat Statistic Techniques and Data Mining
+# Diplomature Statistic Techniques and Data Mining
 
 In this repository store the notebooks that were developed in the diplomature.
 Themes per module:
