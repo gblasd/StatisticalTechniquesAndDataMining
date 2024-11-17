@@ -17,6 +17,7 @@ head(data)
 
 # Standardize the data
 df <- scale(data)
+df <- data
 head(df)
 
 # Compute the dissimilirity matrix
@@ -68,7 +69,7 @@ fviz_dend(res.hc, k = 5, # Cut in four groups
 
 # Cluster plot
 fviz_cluster(list(data = df, cluster = grp),
-             palette = c("#2E9FDF", "#00AFBB", "#E7B800", "#FC4E07", "#004E02"),
+             palette = c("#2E9FDF", "#E7B800", "#00AFBB", "#004E02", "#FC4E07"),
              ellipse.type = "convex", # Concentration ellipse
              repel = TRUE, # Avoid label overplotting (slow)
              show.clust.cent = FALSE, ggtheme = theme_minimal())
